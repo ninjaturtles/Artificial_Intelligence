@@ -1,0 +1,74 @@
+	Informal Problem Description
+There are 3 missionaries and 3 cannibals on one side of the river, call it side L. The goal is to transfer everyone to the other side of the river, side R, using a boat that can take a maximum of two passengers. Missionaries cannot be left outnumbered by cannibals at any given time.
+
+     Assumptions
+-     Starting point is the left bank of the river
+-     The boat does not drive itself, therefore needs someone to drive it back
+
+     Problem Formulation
+
+1. Initial State
+Initial state (ML, CL, BP, MR, CR) = (3, 3, L, 0, 0) 
+where ML = missionaries on the left bank
+CL = cannibals on the left bank
+BP = boat position
+MR = missionaries on the right bank
+CR = cannibals on the right bank
+
+2. Actions
+
+1 missionary and 1 cannibal sail to side R
+1 missionary and 1 cannibal sail to side L
+1 missionary sails to R
+1 missionary sails to L
+1 cannibal sails to R
+1 cannibal sails to L
+2 missionaries sail to R
+2 missionaries sail to L
+2 cannibals sail to R
+2 cannibals sail to L
+
+Note: not all states are reachable (e.g. (0, 0, L, 0, 0)). Some states are illegal.
+
+3. Transition Model
+
+•  1 missionary and 1 cannibal sail to side R
+Subtracts 1 from both missionary count and cannibal count of side L. Change Boat position to R. Adds 1 to both missionary count and cannibal count of side R. 
+
+•  1 missionary and 1 cannibal sail to side L
+Subtracts 1 from both missionary count and cannibal count of side R. Change Boat position to L. A¬¬¬¬dds 1 to both missionary count and cannibal count of side L. 
+
+
+
+•  1 missionary sails to R
+Subtracts 1 from missionary count of side L. Change Boat position to R. Adds 1 to missionary count of side R. 
+
+•  1 missionary sails to L
+Subtracts 1 from missionary count of side R. Change Boat position to L. Adds 1 to missionary count of side L. 
+
+•  1 cannibal sails to R
+Subtracts 1 from cannibal count of side L. Change Boat position to R. Adds 1 to cannibal count of side R. 
+
+•  1 cannibal sails to L
+Subtracts 1 from cannibal count of side R. Change Boat position to L. Adds 1 to cannibal count of side L. 
+
+•  2 missionaries sail to R
+Subtracts 2 from missionary count of side L. Change Boat position to R. Adds 2 to missionary count of side R. 
+
+•  2 missionaries sail to L
+Subtracts 2 from missionary count of side R. Change Boat position to L. Adds 2 to missionary count of side L. 
+
+•  2 cannibals sail to R
+Subtracts 2 from cannibal count of side L. Change Boat position to R. Adds 2 to cannibal count of side R. 
+
+•  2 cannibals sail to L
+Subtracts 2 from cannibal count of side R. Change Boat position to L. Adds 2 to cannibal count of side L. 
+
+
+4. Goal Test
+
+Check if missionary count and cannibal count of side R are equal to 3, and boat position is R.
+
+5. Path Cost
+
+Each boat trip has a cost of 1. The total path cost will be the total number of boat trips taken from initial state to goal state.
