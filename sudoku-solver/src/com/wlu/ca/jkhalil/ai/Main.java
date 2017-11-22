@@ -6,7 +6,7 @@ import java.util.Scanner;
  * file name: Main.java
  * Main class
  * 
- * @author Akanksha Malik - Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since Nov 6th, 2017
  */
 public class Main {

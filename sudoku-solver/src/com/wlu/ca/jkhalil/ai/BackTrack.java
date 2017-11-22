@@ -7,7 +7,7 @@ import java.util.Collections;
  * file name: BackTrack.java
  * Back Track algorithm implementation
  * 
- * @author Akanksha Malik - Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since Nov 6th, 2017
  */
 public class BackTrack {

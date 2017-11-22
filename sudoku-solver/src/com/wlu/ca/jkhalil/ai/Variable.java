@@ -7,7 +7,7 @@ import java.util.Arrays;
  * file name: Variable.java
  * Variable class implementation
  * 
- * @author Akanksha Malik - Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since Nov 6th, 2017
  */
 public class Variable implements Comparable<Variable>{

@@ -8,7 +8,7 @@ enum River_Bank {R, L}
 
 /**
  * State class manages and validates states.
- * @author Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since October 1, 2017
  */
 public class State {

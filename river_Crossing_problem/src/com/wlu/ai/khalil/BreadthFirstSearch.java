@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Breadth First Search class. Performs BFS to find the optimal
  * next state in the state space
- * @author Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since October 1, 2017
  */
 public class BreadthFirstSearch {

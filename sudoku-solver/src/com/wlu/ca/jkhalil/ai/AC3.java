@@ -8,7 +8,7 @@ import java.util.Queue;
  * file name: AC3.java
  * AC3 algorithm implementation
  * 
- * @author Akanksha Malik - Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since Nov 6th, 2017
  */
 public class AC3 {

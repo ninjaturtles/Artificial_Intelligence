@@ -13,7 +13,7 @@ import java.util.Arrays;
  * file name: Sudoku.java
  * Sudoku class implementation
  *  
- * @author Akanksha Malik - Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since Nov 6th, 2017
  */
 public class Sudoku {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Main.java
- * @author Johnny Khalil
+ * @author Akanksha Malik - Johnny Khalil - Marko Mihailovic - Jose Romero
  * @since October 1, 2017
  */
 public class Main {
