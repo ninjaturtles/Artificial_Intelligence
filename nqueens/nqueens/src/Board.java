@@ -30,45 +30,32 @@ public class Board {
 
 			grid[i] = random;
 		}
-		//		for (int i = 0, n = grid.length; i < n; i++) {
-		//            int j = rand.nextInt(n);
-		//            int rowToSwap = grid[i];
-		//            grid[i] = grid[j];
-		//            grid[j] = rowToSwap;
-		//        }
+//				for (int i = 0, n = grid.length; i < n; i++) {
+//		            int j = rand.nextInt(n);
+//		            int rowToSwap = grid[i];
+//		            grid[i] = grid[j];
+//		            grid[j] = rowToSwap;
+//		        }
 	}
 
 	// find conflicts in grid, only store column number in conflictedQueens
 	public void findConflicts(int[] assignment) {
-		int q= 0;
-		// wipe out old conflicts
-		conflictedQueens.clear();
+		
+		conflictedQueens.clear(); // wipe out old conflicts
 		//no vertical conflicts
-		// check horizontal conflicts
-//		for (int i = 0; i < assignment.length; i++) {
-//			for (int j = 1; j < assignment.length; j++) {
-//				if (assignment[i] == assignment[j]) {
-//					conflictedQueens.add(i);
-//				}
-//			}
-//		}
-
-
+		//check horizontal and diagonal conflicts
 		for(int i =0; i<assignment.length; i++) {
 			int count = 0;
 			for (int j = 0; j < assignment.length; j++) {
 				if(i!=j) {
-					if((Math.abs(i-j)) == (Math.abs(assignment[i]-assignment[j]))) {
+					if((Math.abs(i-j)) == (Math.abs(assignment[i]-assignment[j]))) 
 						count++;
-//						conflictedQueens.add(i);
-//						System.out.println(assignment[i] +" has conflict with " + assignment[j]);
-					}
+					if(assignment[i] == assignment[j]) 
+						count++;		
 				}
 			}
-			System.out.println("count: "+q +" "+ count);
-			q++;
+			conflictedQueens.add(count);
 		}
-
 
 	}
 
