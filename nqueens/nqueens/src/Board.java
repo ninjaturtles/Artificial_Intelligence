@@ -72,8 +72,8 @@ public class Board {
 
 	}
 
-	public void updateQueen(Variable var, int value) {
-
+	public void updateQueen(int randomCoflictedQueen, int newRowPosition) {
+		grid[randomCoflictedQueen] = newRowPosition;
 	}
 
 	public boolean isSolution(int[] current) {

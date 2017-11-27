@@ -4,22 +4,27 @@ import java.util.Random;
 public class MinConflicts {
 
 	public static boolean minConflics(Board board, int max_steps) {
+		// starting arrangement
 		int[] current = board.getGrid(); 
 		
 		for (int i = 0; i < max_steps; i++) {
+			// check if solved; if there are't any conflicts, problem is solved
 			if (board.isSolution(current)) {
 				board.setGrid(current);
 				return true;
 			}
-			//a randomly chosen conflicted variable from board.conflictedVariables
-//			Variable var = chooseRandomConflictedVariable(board);
-//			int newRowPosition = minNumberOfConflictsHeuristic(var, current);
-//			board.updateQueen(var, newRowPosition);
+			//choose one of the conflicting queens at random
+//			int randomCoflictedQueen = chooseRandomConflictedQueen(board);
+			// find the queen that the conflicting queen can swap with
+			// that will give minimum number of overall conflicts
+//			int newRowPosition = minNumberOfConflictsHeuristic(randomCoflictedQueen, current);
+			// update queen position
+//			board.updateQueen(randomCoflictedQueen, newRowPosition);
 		}
 		return false;
 	}
 
-	public static int chooseRandomConflictedVariable(Board board) {
+	private static int chooseRandomConflictedQueen(Board board) {
 		Random rand = new Random();
 		ArrayList<Integer> conflictedQueens = board.getConflictedQueens();
 		int random = rand.nextInt(conflictedQueens.size());
@@ -29,7 +34,7 @@ public class MinConflicts {
 	 /**
      * Returns the number of queens that conflict with passed queen.
      */
-	public static int minNumberOfConflictsHeuristic(Variable queen, Variable[][] assignment) {
+	private static int minNumberOfConflictsHeuristic(int queen, int[] assignment) {
 		return 0;
 	}
 
