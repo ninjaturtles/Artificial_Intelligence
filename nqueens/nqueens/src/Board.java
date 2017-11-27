@@ -110,7 +110,7 @@ public class Board {
 	}
 
 	public void printConflicts() {
-		System.out.println("Prinitng Conflicting Queens");
+		System.out.println("Printing Conflicting Queens");
 		for (int i = 0; i < conflictedQueens.size(); i++) {
 			System.out.print(conflictedQueens.get(i) + " ");
 		}
