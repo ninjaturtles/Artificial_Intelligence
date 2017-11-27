@@ -3,7 +3,6 @@ import java.util.Random;
 
 public class MinConflicts {
 
-	
 	public static boolean minConflics(Board board, int max_steps) {
 		int[] current = board.getGrid(); 
 		
@@ -33,7 +32,5 @@ public class MinConflicts {
 	public static int minNumberOfConflictsHeuristic(Variable queen, Variable[][] assignment) {
 		return 0;
 	}
-	
-	
-	
+
 } // end of MinConflics
