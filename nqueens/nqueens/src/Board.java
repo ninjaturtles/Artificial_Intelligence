@@ -1,21 +1,27 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+
 
 public class Board {
 	private int N;
 	private int[] grid;
-	private ArrayList<Integer> conflictedQueens;
+	//	private ArrayList<Integer> conflictedQueens;
+	private HashMap<Integer, Integer> conflictedQueens;
 
-	public Board(int n) {
+	public Board(int n, boolean greedy) {
 		this.N = n;
 		this.grid = new int[n];
-		this.conflictedQueens = new ArrayList<Integer>();
-		this.initial_assignment();
+		//		this.conflictedQueens = new ArrayList<Integer>();
+		this.conflictedQueens = new HashMap<Integer, Integer> ();
+		this.initial_assignment(greedy);
 	}
 
-	private void initial_assignment() {
+	private void initial_assignment(Boolean greedy) {
 		// the initial assignment of the queens on the board
 		int  random;
 		Random rand = new Random();
@@ -24,39 +30,48 @@ public class Board {
 		for (int i = 0; i < grid.length; i++) {
 			random = rand.nextInt(N);
 			grid[i] = i;
-			while(!alreadyGeneratedNums.add(random)) {
-				random = rand.nextInt(N);	
+			if(greedy) {
+				//greedy and random initial assignment
+				while(!alreadyGeneratedNums.add(random)) {
+					random = rand.nextInt(N);	
+				}
 			}
 
 			grid[i] = random;
 		}
-//				for (int i = 0, n = grid.length; i < n; i++) {
-//		            int j = rand.nextInt(n);
-//		            int rowToSwap = grid[i];
-//		            grid[i] = grid[j];
-//		            grid[j] = rowToSwap;
-//		        }
+		if(!greedy) {	
+			//random initial assignment
+			for (int i = 0, n = grid.length; i < n; i++) {
+				int j = rand.nextInt(n);
+				int rowToSwap = grid[i];
+				grid[i] = grid[j];
+				grid[j] = rowToSwap;
+			}
+		}
 	}
 
 	// find conflicts in grid, only store column number in conflictedQueens
 	public void findConflicts(int[] assignment) {
-		
+
 		conflictedQueens.clear(); // wipe out old conflicts
-		//no vertical conflicts
-		//check horizontal and diagonal conflicts
+		//no horizontal conflicts
+		//check vertical and diagonal conflicts
 		for(int i =0; i<assignment.length; i++) {
 			int count = 0;
 			for (int j = 0; j < assignment.length; j++) {
-				if(i!=j) {
+				if(i != j) {
+					// diagonal
 					if((Math.abs(i-j)) == (Math.abs(assignment[i]-assignment[j]))) 
 						count++;
+					// vertical
 					if(assignment[i] == assignment[j]) 
 						count++;		
 				}
 			}
-			conflictedQueens.add(count);
+			if(count != 0) {
+				conflictedQueens.put(i,count);
+			}
 		}
-
 	}
 
 	public void updateQueen(int randomCoflictedQueen, int newRowPosition) {
@@ -66,7 +81,13 @@ public class Board {
 	public boolean isSolution(int[] current) {
 		// assignment is a solution if conflictedVariables is empty
 		findConflicts(current);
-		return conflictedQueens.isEmpty(); 
+		return (conflictedQueens.isEmpty());
+		//		for(int i =0;i<conflictedQueens.size();i++) {
+		//			if(conflictedQueens.get(i) !=0)
+		//				return false;
+		//		}
+		//
+		//		return true;
 	}
 
 	/**
@@ -98,10 +119,13 @@ public class Board {
 
 	public void printConflicts() {
 		System.out.println("Printing Conflicting Queens");
-		for (int i = 0; i < conflictedQueens.size(); i++) {
-			System.out.print(conflictedQueens.get(i) + " ");
+
+		Iterator<Entry<Integer, Integer>> it = conflictedQueens.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry<Integer, Integer> pair = (Map.Entry<Integer, Integer>)it.next();
+			System.out.println("Queen: " + pair.getKey() + " = " + pair.getValue() + " Conflicts");
+			it.remove(); // avoids a ConcurrentModificationException
 		}
-		System.out.println();
 	}
 
 	public void printQueensPositioins() {
@@ -120,7 +144,7 @@ public class Board {
 		return N;
 	}
 
-	public ArrayList<Integer> getConflictedQueens() {
+	public HashMap<Integer,Integer> getConflictedQueens() {
 		return conflictedQueens;
 	}
 
