@@ -9,9 +9,11 @@ public class MinConflicts {
 	public static boolean minConflics(Board board, int max_steps) {
 		// starting arrangement
 		int[] current = board.getGrid(); 
-
+		
 		for (int i = 0; i < max_steps; i++) {
-			System.out.println(i);
+			
+			board.printAssignment(current);
+			System.out.println();
 			// check if solved; if there are't any conflicts, problem is solved
 			if (board.isSolution(current)) {
 				board.setGrid(current);
@@ -24,11 +26,46 @@ public class MinConflicts {
 			// that will give minimum number of overall conflicts
 			int newRowPosition = minNumberOfConflictsHeuristic(randomCoflictedQueen, current);
 			// update queen position
-			//			board.updateQueen(randomCoflictedQueen, newRowPosition);
+			board.updateQueen(randomCoflictedQueen, newRowPosition);
 		}
 		return false;
 	}
 
+	/**
+	 * Returns the number of queens that conflict with passed queen.
+	 */
+	private static int minNumberOfConflictsHeuristic(int row, int[] assignment) {
+		HashMap<Integer, Integer> queenConflict = new HashMap<Integer, Integer> ();
+		
+		
+		for (int i = 0; i<assignment.length; i++) {
+			int count = 0;
+			for (int j = 0; j < assignment.length; j++) {
+				if(i != row) {
+					// diagonal
+					if((Math.abs(i-row)) == (Math.abs(assignment[i]-assignment[row]))) 
+						count++;
+					// vertical
+					if(assignment[i] == assignment[row]) 
+						count++;		
+				}
+			}
+				queenConflict.put(i, count);
+			
+		}
+
+		
+		
+		Entry<Integer,Integer> min = null;
+		for(Entry<Integer,Integer> entry :queenConflict.entrySet()) {
+			if(min == null || min.getValue() > entry.getValue()) {
+				min=entry;
+			}
+
+		}
+		return min.getKey();
+	}
+	
 	private static int chooseRandomConflictedQueen(Board board) {
 		Random rand = new Random();
 		HashMap<Integer,Integer> conflictedQueens = board.getConflictedQueens();
@@ -42,15 +79,10 @@ public class MinConflicts {
 			count++;
 			randomQueen = (int) pair.getKey(); 
 		}
-		
+		System.out.println(randomQueen);
 		return randomQueen;
 	}
 
-	/**
-	 * Returns the number of queens that conflict with passed queen.
-	 */
-	private static int minNumberOfConflictsHeuristic(int queen, int[] assignment) {
-		return 0;
-	}
+
 
 } // end of MinConflics

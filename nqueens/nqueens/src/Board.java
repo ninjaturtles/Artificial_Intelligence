@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,13 +11,11 @@ import java.util.Set;
 public class Board {
 	private int N;
 	private int[] grid;
-	//	private ArrayList<Integer> conflictedQueens;
 	private HashMap<Integer, Integer> conflictedQueens;
 
 	public Board(int n, boolean greedy) {
 		this.N = n;
 		this.grid = new int[n];
-		//		this.conflictedQueens = new ArrayList<Integer>();
 		this.conflictedQueens = new HashMap<Integer, Integer> ();
 		this.initial_assignment(greedy);
 	}
@@ -82,12 +81,6 @@ public class Board {
 		// assignment is a solution if conflictedVariables is empty
 		findConflicts(current);
 		return (conflictedQueens.isEmpty());
-		//		for(int i =0;i<conflictedQueens.size();i++) {
-		//			if(conflictedQueens.get(i) !=0)
-		//				return false;
-		//		}
-		//
-		//		return true;
 	}
 
 	/**
