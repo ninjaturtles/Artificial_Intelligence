@@ -13,8 +13,8 @@ public class Main {
 			board.printSolution();
 			long stop = System.currentTimeMillis();
 			System.out.println("Found in " + ((double)(stop-start))/1000 + "s.\n");
-			board.printConflicts();
-			board.printQueensPositioins();
+//			board.printConflicts();
+//			board.printQueensPositioins();
 		}else {
 			System.out.println("No Solution can be found");
 		}
