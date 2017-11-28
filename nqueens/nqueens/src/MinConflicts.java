@@ -23,11 +23,14 @@ public class MinConflicts {
 			}
 			//choose one of the conflicting queens at random
 			int randomCoflictedQueen = chooseRandomConflictedQueen(board);
-
+//			board.printAssignment(current);
+//			System.out.println("randomCoflictedQueen: " + randomCoflictedQueen);
 			// find the queen that the conflicting queen can swap with
 			// that will give minimum number of overall conflicts
 			int newRowPosition = minNumberOfConflictsHeuristic(randomCoflictedQueen, current);
 			// update queen position
+//			System.out.println("newRowPosition: " + newRowPosition);
+
 			board.updateQueen(randomCoflictedQueen, newRowPosition);
 		}
 		System.out.println("No solution found");
@@ -39,11 +42,11 @@ public class MinConflicts {
 	 */
 	private static int minNumberOfConflictsHeuristic(int queen, int[] assignment) {
 		HashMap<Integer, Integer> queenConflict = new HashMap<Integer, Integer> ();
-
+		
 		for (int i = 0; i<assignment.length; i++) {
 			int count = 0;
 			for (int j = 0; j < assignment.length; j++) {
-				if(i != queen) {
+				if(i != assignment[queen]) {
 					// diagonal
 					if((Math.abs(assignment[j]-i)) == (Math.abs(j-queen))) { 
 						count++;
@@ -57,13 +60,17 @@ public class MinConflicts {
 			if(count != 0) {
 				queenConflict.put(i, count);
 			}
-		
+	
 		}
 
 		Entry<Integer,Integer> min = null;
-		for(Entry<Integer,Integer> entry :queenConflict.entrySet()) {
-			if(min == null || min.getValue() > entry.getValue()) {
-				min=entry;
+		for(Entry<Integer,Integer> entry : queenConflict.entrySet()) {
+			if (assignment[queen] == entry.getKey()) {
+				System.out.println("same position");
+			} else {
+				if(min == null || min.getValue() > entry.getValue()) {
+					min=entry;
+				}
 			}
 		}
 		return min.getKey();
@@ -78,7 +85,7 @@ public class MinConflicts {
 
 		Iterator<Entry<Integer, Integer>> it = conflictedQueens.entrySet().iterator();
 		while (it.hasNext() && count <= random ) {
-			Map.Entry<Integer, Integer> pair = (Map.Entry<Integer, Integer>)it.next();
+			Map.Entry<Integer, Integer> pair = (Map.Entry<Integer, Integer>) it.next();
 			count++;
 			randomQueen = (int) pair.getKey(); 
 		}
