@@ -69,7 +69,7 @@ public class Board {
 		}
 	}
 
-	public void printQueensPositioins() {
+	public void printQueensPositions() {
 		System.out.println("Printing Queens Positions");
 		for (int i = 0; i < grid.length; i++) {
 			System.out.print(grid[i] + " ");
