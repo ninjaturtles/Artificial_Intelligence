@@ -13,7 +13,7 @@ public class Main {
 			
 //			board.findConflicts(board.getGrid());
 //			board.printConflicts();
-			board.printQueensPositioins();
+//			board.printQueensPositioins();
 //			board.printAssignment(board.getGrid());
 			MinConflicts.minConflics(board, max_steps);
 //			board.printSolution();
