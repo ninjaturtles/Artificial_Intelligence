@@ -108,17 +108,16 @@ public class MinConflicts {
 			int count = 0;
 			for (int j = 0; j < current.length; j++) {
 				// diagonal
-				if((Math.abs(current[j]-i)) == (Math.abs(j-queenRow))) { 
+				if ((Math.abs(current[j]-i)) == (Math.abs(j-queenRow))) { 
 					count++;
 				}
 				// vertical
-				if(current[j] == i) {
+				if (current[j] == i) {
 					count++;	
 				}
 			}
 			queenConflicts.put(i, count);
 		}
-
 
 		Entry<Integer,Integer> min = null;
 		for(Entry<Integer,Integer> entry : queenConflicts.entrySet()) {
@@ -132,27 +131,18 @@ public class MinConflicts {
 		}
 		
 		// find all entries that have same min number of conflicts
-		HashMap<Integer, Integer> hashm = new HashMap<Integer, Integer> ();
+		ArrayList<Integer> minConflictingQueens = new ArrayList<Integer>();
 		for(Entry<Integer,Integer> entry : queenConflicts.entrySet()) {
 			if (entry.getValue() == min.getValue()) {
-				hashm.put(entry.getKey(), entry.getValue());
+				minConflictingQueens.add(entry.getKey());
 			}
 		}
 		
 		// pick entry at random
 		Random rand = new Random();
-		int random = rand.nextInt(hashm.size()) + 0;
-		int count = 0;
-		int randomQueen = 0;
+		int random = rand.nextInt(minConflictingQueens.size()) + 0;
 
-		Iterator<Entry<Integer, Integer>> it = hashm.entrySet().iterator();
-		while (it.hasNext() && count <= random ) {
-			Map.Entry<Integer, Integer> pair = (Map.Entry<Integer, Integer>) it.next();
-			count++;
-			randomQueen = (int) pair.getKey(); 
-			it.remove();
-		}
-		return randomQueen;
+		return minConflictingQueens.get(random);
 	}
 
 	private static int chooseRandomConflictedQueen() {
