@@ -4,7 +4,7 @@ import java.util.Set;
 
 
 public class Board {
-	private int N;
+	public static int N;
 	private int[] grid;
 
 	public Board(int n, boolean greedy) {

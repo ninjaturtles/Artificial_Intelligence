@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class MinConflicts {
 	private static ArrayList<Integer> conflictedQueens;
+	private static int[] conflictedQueens2 = new int[Board.N];
 	public static int[] current;
 	
 	public static boolean minConflics(Board board, int max_steps) {
@@ -60,28 +61,41 @@ public class MinConflicts {
 	public static void findConflicts() {
 
 		conflictedQueens.clear(); // wipe out old conflicts
+		conflictedQueens2 = new int[Board.N];
+		int count2=0;
 		//no horizontal conflicts
 		//check vertical and diagonal conflicts
 		for(int i = 0; i<current.length; i++) {
 			int count = 0;
-			for (int j = 0; j < current.length; j++) {
-				if(i != j) {
-					// diagonal
-					if((Math.abs(i-j)) == (Math.abs(current[i]-current[j]))) {
-						count++;
-						break;
-					}
-					// vertical
-					if(current[i] == current[j]) { 
-						count++;
-						break;
+			if (conflictedQueens2[i]!=1) {
+				for (int j = 0; j < current.length; j++) {
+					if(i != j) {
+						// diagonal
+						if((Math.abs(i-j)) == (Math.abs(current[i]-current[j]))) {
+							count++;
+							conflictedQueens2[i] = 1;
+							conflictedQueens2[j] = 1;
+							break;
+						}
+						// vertical
+						if(current[i] == current[j]) { 
+							count++;
+							conflictedQueens2[i] = 1;
+							conflictedQueens2[j] = 1;
+							break;
+						}
 					}
 				}
+			}
+			else {
+				count2++;
+				count++;
 			}
 			if(count != 0) {
 				conflictedQueens.add(i);
 			}
 		}
+		//System.out.println("Used "+count2+" times.");
 	}
 	
 	/**
